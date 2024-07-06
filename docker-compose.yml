@@ -1,0 +1,13 @@
+services:
+  app:
+    image: node:alpine
+    container_name: app_front
+    entrypoint: /bin/sh
+    ports:
+      - 8000:8000
+    working_dir: /srv/app
+    volumes:
+      - type: bind
+        source: ./
+        target: /srv/app
+    tty: true
