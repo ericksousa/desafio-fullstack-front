@@ -1,16 +1,24 @@
-import { createApp } from 'vue'
-import PrimeVue from 'primevue/config';
-import Aura from '@primevue/themes/aura';
-import App from './App.vue'
+import { createApp } from "vue";
+import { createPinia } from "pinia";
+import { router } from "./vue/router";
+import PrimeVue from "primevue/config";
+import Aura from "@primevue/themes/aura";
+import App from "./App.vue";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 
-import './views/styles/global.css'
+import "./views/styles/global.css";
 
 const app = createApp(App);
 
-app.use(PrimeVue, {
-    theme: {
-        preset: Aura
-    }
-})
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
 
-app.mount('#app')
+app.use(pinia)
+    .use(router)
+    .use(PrimeVue, {
+        theme: {
+            preset: Aura,
+        },
+    });
+
+app.mount("#app");
