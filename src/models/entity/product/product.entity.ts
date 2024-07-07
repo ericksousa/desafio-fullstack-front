@@ -4,6 +4,7 @@ export class ProductEntity {
     id?: number;
     name?: string;
     price?: string;
+    category_id?: number;
     category?: CategoryEntity;
     created_at?: string;
     updated_at?: string;

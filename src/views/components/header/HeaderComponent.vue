@@ -62,7 +62,7 @@ function logout() {
 
             <template #end>
                 <div class="flex items-center gap-2">
-                    <Button type="button" class="h-8" @click="toggleMenu" aria-haspopup="true"
+                    <Button type="button" class="h-8 cursor-pointer" @click="toggleMenu" aria-haspopup="true"
                         aria-controls="overlay_menu" unstyled>
                         <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
                             shape="circle" />

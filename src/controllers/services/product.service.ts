@@ -11,6 +11,12 @@ export class ProductService extends BaseService {
     async getProducts(): Promise<ResponseDTO<ProductEntity[]>> {
         return this.getAll();
     }
+
+    async createProduct(
+        payload: ProductEntity
+    ): Promise<ResponseDTO<ProductEntity>> {
+        return this.save(payload);
+    }
 }
 
 export default new ProductService();

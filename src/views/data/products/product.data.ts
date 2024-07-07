@@ -4,6 +4,7 @@ import { ProductEntity } from "@/models/entity/product/product.entity";
 
 class ProductData {
     loading_products = false;
+    saving_form = false;
 
     payload = new ProductEntity();
 
@@ -12,6 +13,15 @@ class ProductData {
         return await ProductService.getProducts().finally(
             () => (this.loading_products = false)
         );
+    }
+
+    async createProduct(
+        payload: ProductEntity
+    ): Promise<ResponseDTO<ProductEntity>> {
+        this.saving_form = true;
+        return await ProductService.createProduct(payload).finally(() => {
+            this.saving_form = false;
+        });
     }
 }
 

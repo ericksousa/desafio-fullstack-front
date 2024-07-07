@@ -47,7 +47,6 @@ async function loadProducts() {
 onMounted(async () => {
     if (!products.value.length) {
         await loadProducts()
-
     };
 });
 </script>
