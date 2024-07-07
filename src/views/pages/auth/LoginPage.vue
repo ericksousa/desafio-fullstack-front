@@ -26,23 +26,6 @@ async function submitForm(): Promise<void> {
 
         router.push({ name: ENUM_ROUTER_NAME.LISTA_PRODUTOS })
     });
-
-
-    //   Loading.show({
-    //     message: ENUM_LOADING.LOGANDO,
-    //   });
-
-    //   await data
-    //     .login(data.payload_login)
-    //     .then(({ user, token }) => {
-    //       auth_store().$patch({
-    //         user,
-    //         token,
-    //       });
-    //       CreateNotify.success("Login efetuado com sucesso!");
-    //       router.push({ name: ENUM_ROUTER_NAME.HOME });
-    //     })
-    //     .finally(() => Loading.hide());
 }
 </script>
 

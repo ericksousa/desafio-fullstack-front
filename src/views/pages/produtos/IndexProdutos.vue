@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue';
+import { ProductEntity } from '@/models/entity/product/product.entity';
+import { FilterMatchMode } from '@primevue/core/api';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import ProductData from '@/views/data/products/product.data';
-import { ProductEntity } from '@/models/entity/product/product.entity';
+import InputText from 'primevue/inputtext';
+import InputIcon from 'primevue/inputicon';
+import IconField from 'primevue/iconfield';
 
 const data = reactive(ProductData);
 const products = ref<ProductEntity[]>([])
+
+const filters = ref({
+    'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+});
 
 const columns = [
     { field: 'id', header: '#' },
@@ -28,11 +36,18 @@ onMounted(async () => {
     <Card>
         <template #content>
             <DataTable :value="products" :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]"
-                :loading="data.loading_products" tableStyle="min-width: 50rem" stripedRows paginator>
+                :loading="data.loading_products" :filters="filters" tableStyle="min-width: 50rem" stripedRows paginator>
                 <template #header>
                     <div class="flex flex-wrap items-center justify-between gap-2">
-                        <span class="text-xl font-bold">Produtos</span>
-                        <Button label="Adicionar" icon="pi pi-plus" size="small" rounded raised />
+                        <h4 class="text-2xl font-medium">Produtos</h4>
+
+                        <IconField>
+                            <InputIcon class="flex">
+                                <i class="pi pi-search" />
+                            </InputIcon>
+
+                            <InputText v-model="filters['global'].value" placeholder="Filtrar..." />
+                        </IconField>
                     </div>
                 </template>
 
