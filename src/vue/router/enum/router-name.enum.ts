@@ -3,4 +3,7 @@ export enum ENUM_ROUTER_NAME {
 
     // auth
     LOGIN = "login",
+
+    // produtos
+    LISTA_PRODUTOS = "lista-produtos",
 }

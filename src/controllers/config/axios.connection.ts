@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { auth_store } from "@/vue/store/auth/auth.store";
+import { useAuthStore } from "@/vue/store/auth/auth.store";
 
 class AxiosConnection {
     get AXIOS_INSTANCE(): AxiosInstance {
@@ -11,10 +11,10 @@ class AxiosConnection {
 
         instance.interceptors.request.use(
             (config) => {
-                const authStore = auth_store();
+                const auth_store = useAuthStore();
 
-                if (authStore.token) {
-                    config.headers.Authorization = `Bearer ${authStore.token}`;
+                if (auth_store.token) {
+                    config.headers.Authorization = `Bearer ${auth_store.token}`;
                 }
 
                 return config;

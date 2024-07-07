@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import { auth_hooks } from "./hooks/auth.hooks";
+import { produtos_hooks } from "./hooks/produtos.hooks";
 import { ENUM_ROUTER_NAME } from "./enum/router-name.enum";
-import { auth_store } from "../store/auth/auth.store";
+import { useAuthStore } from "../store/auth/auth.store";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -11,6 +12,7 @@ const routes: RouteRecordRaw[] = [
         },
     },
     ...auth_hooks,
+    ...produtos_hooks,
 ];
 
 export const router = createRouter({
@@ -25,9 +27,9 @@ router.beforeEach((to, _from, next) => {
         (record) => record.meta.only_disconected
     );
 
-    const authStore = auth_store();
+    const auth_store = useAuthStore();
 
-    const logged_in = !!authStore.token;
+    const logged_in = !!auth_store.token;
 
     if (!is_public && !logged_in) {
         return next({
@@ -38,7 +40,7 @@ router.beforeEach((to, _from, next) => {
 
     if (logged_in && only_disconected) {
         return next({
-            name: ENUM_ROUTER_NAME.HOME,
+            name: ENUM_ROUTER_NAME.LISTA_PRODUTOS,
         });
     }
 
