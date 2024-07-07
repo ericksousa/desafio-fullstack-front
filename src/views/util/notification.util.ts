@@ -4,7 +4,7 @@ export class CreateToast {
     static error(message: string): void {
         ToastEventBus.emit("add", {
             severity: "error",
-            summary: "Ops...ocorreu um erro inesperado",
+            summary: "Ops...",
             detail: message,
             life: 6000,
             group: "global-notification",
