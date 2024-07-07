@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Card from 'primevue/card';
 import ProductData from '@/views/data/products/product.data';
-import CategoryData from '@/views/data/category/category.data';
+import CategoryData from '@/views/data/categories/category.data';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import InputNumber from 'primevue/inputnumber';

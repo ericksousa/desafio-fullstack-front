@@ -14,6 +14,11 @@ const itemsMenubar = ref([
         label: 'Produtos',
         route: '/produtos'
     },
+
+    {
+        label: 'Categorias',
+        route: '/categorias'
+    },
 ]);
 
 const items = ref([
