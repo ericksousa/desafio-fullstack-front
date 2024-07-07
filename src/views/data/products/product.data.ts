@@ -5,6 +5,8 @@ import { ProductEntity } from "@/models/entity/product/product.entity";
 class ProductData {
     loading_products = false;
 
+    payload = new ProductEntity();
+
     async getProducts(): Promise<ResponseDTO<ProductEntity[]>> {
         this.loading_products = true;
         return await ProductService.getProducts().finally(
