@@ -11,6 +11,12 @@ export class CategoryService extends BaseService {
     async getCategories(): Promise<ResponseDTO<CategoryEntity[]>> {
         return this.getAll();
     }
+
+    async createCategory(
+        payload: CategoryEntity
+    ): Promise<ResponseDTO<CategoryEntity>> {
+        return this.save(payload);
+    }
 }
 
 export default new CategoryService();

@@ -43,8 +43,12 @@ async function loadCategories() {
 }
 
 onMounted(async () => {
-    if (!categories.value.length) {
+    if (!categories.value.length || categoryStore.forceReload) {
         await loadCategories()
+
+        categoryStore.$patch({
+            forceReload: false
+        })
     };
 });
 </script>

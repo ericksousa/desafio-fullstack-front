@@ -16,15 +16,15 @@ export const categories_hooks: RouteRecordRaw[] = [
                 },
             },
 
-            // {
-            //     path: "novo",
-            //     name: ENUM_ROUTER_NAME.NOVA_CATEGORIA,
-            //     component: () =>
-            //         import("@/views/pages/categories/CreateCategory.vue"),
-            //     meta: {
-            //         title: "Categorias",
-            //     },
-            // },
+            {
+                path: "novo",
+                name: ENUM_ROUTER_NAME.NOVA_CATEGORIA,
+                component: () =>
+                    import("@/views/pages/categories/CreateCategory.vue"),
+                meta: {
+                    title: "Categorias",
+                },
+            },
         ],
     },
 ];
