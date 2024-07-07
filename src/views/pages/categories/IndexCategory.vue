@@ -18,7 +18,6 @@ const data = reactive(CategoryData);
 const router = useRouter();
 const categoryStore = useCategoryStore();
 
-
 const filters = ref({
     'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
 });

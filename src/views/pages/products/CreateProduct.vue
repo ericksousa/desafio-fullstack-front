@@ -12,9 +12,11 @@ import { CreateToast } from '@/views/util/notification.util';
 import { useRouter } from 'vue-router';
 import { ENUM_ROUTER_NAME } from '@/vue/router/enum/router-name.enum';
 import { ProductEntity } from '@/models/entity/product/product.entity';
+import { useProductStore } from '@/vue/store/products/products.store';
 
 const data = reactive(ProductData);
 const categoryData = reactive(CategoryData);
+const productStore = useProductStore();
 const router = useRouter();
 
 const categories = ref<CategoryEntity[]>([])
@@ -22,6 +24,10 @@ const categories = ref<CategoryEntity[]>([])
 async function submitForm(): Promise<void> {
     await data.createProduct(data.payload).then(({ message }) => {
         CreateToast.success(message);
+
+        productStore.$patch({
+            forceReload: true
+        })
 
         router.push({ name: ENUM_ROUTER_NAME.LISTA_PRODUTOS })
     })

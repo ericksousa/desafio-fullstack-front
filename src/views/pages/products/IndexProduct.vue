@@ -18,7 +18,6 @@ const data = reactive(ProductData);
 const router = useRouter();
 const productStore = useProductStore();
 
-
 const filters = ref({
     'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
 });
@@ -45,8 +44,12 @@ async function loadProducts() {
 }
 
 onMounted(async () => {
-    if (!products.value.length) {
+    if (!products.value.length || productStore.forceReload) {
         await loadProducts()
+
+        productStore.$patch({
+            forceReload: false
+        })
     };
 });
 </script>
