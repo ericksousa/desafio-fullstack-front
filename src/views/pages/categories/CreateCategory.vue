@@ -3,7 +3,7 @@ import Card from 'primevue/card';
 import CategoryData from '@/views/data/categories/category.data';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
-import { reactive } from 'vue';
+import { onBeforeUnmount, reactive } from 'vue';
 import { CategoryEntity } from '@/models/entity/category/category.entity';
 import { CreateToast } from '@/views/util/notification.util';
 import { useRouter } from 'vue-router';
@@ -27,9 +27,12 @@ async function submitForm(): Promise<void> {
 }
 
 async function resetForm(): Promise<void> {
-    data.payload = new CategoryEntity()
     router.push({ name: ENUM_ROUTER_NAME.LISTA_CATEGORIAS })
 }
+
+onBeforeUnmount(() => {
+    data.payload = new CategoryEntity()
+})
 </script>
 
 <template>

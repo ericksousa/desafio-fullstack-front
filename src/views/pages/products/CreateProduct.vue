@@ -6,7 +6,7 @@ import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import InputNumber from 'primevue/inputnumber';
 import Select from 'primevue/select';
-import { onMounted, reactive, ref } from 'vue';
+import { onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 import { CategoryEntity } from '@/models/entity/category/category.entity';
 import { CreateToast } from '@/views/util/notification.util';
 import { useRouter } from 'vue-router';
@@ -34,7 +34,6 @@ async function submitForm(): Promise<void> {
 }
 
 async function resetForm(): Promise<void> {
-    data.payload = new ProductEntity()
     router.push({ name: ENUM_ROUTER_NAME.LISTA_PRODUTOS })
 }
 
@@ -45,6 +44,10 @@ onMounted(async () => {
         categories.value = c.data
     })
 });
+
+onBeforeUnmount(() => {
+    data.payload = new ProductEntity()
+})
 </script>
 
 <template>
