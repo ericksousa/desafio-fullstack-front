@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from "vue-router";
 import { ENUM_ROUTER_NAME } from "@/vue/router/enum/router-name.enum";
 
-export const produtos_hooks: RouteRecordRaw[] = [
+export const products_hooks: RouteRecordRaw[] = [
     {
         path: "/produtos",
         component: () => import("@/views/pages/layouts/DashboardLayout.vue"),

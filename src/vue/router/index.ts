@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import { auth_hooks } from "./hooks/auth.hooks";
-import { produtos_hooks } from "./hooks/produtos.hooks";
+import { products_hooks } from "./hooks/products.hooks";
 import { ENUM_ROUTER_NAME } from "./enum/router-name.enum";
 import { useAuthStore } from "../store/auth/auth.store";
+import { categories_hooks } from "./hooks/categories.hooks";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -12,7 +13,8 @@ const routes: RouteRecordRaw[] = [
         },
     },
     ...auth_hooks,
-    ...produtos_hooks,
+    ...products_hooks,
+    ...categories_hooks,
 ];
 
 export const router = createRouter({

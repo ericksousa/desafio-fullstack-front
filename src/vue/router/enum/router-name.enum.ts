@@ -7,4 +7,8 @@ export enum ENUM_ROUTER_NAME {
     // produtos
     LISTA_PRODUTOS = "lista-produtos",
     NOVO_PRODUTO = "novo-produtos",
+
+    // categorias
+    LISTA_CATEGORIAS = "lista-categorias",
+    NOVA_CATEGORIA = "nova-categoria",
 }
