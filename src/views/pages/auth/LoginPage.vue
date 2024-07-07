@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { reactive, ref } from 'vue';
+import { onBeforeUnmount, reactive, ref } from 'vue';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import AuthData from '@/views/data/auth/auth.data';
@@ -9,6 +9,7 @@ import { CreateToast } from '@/views/util/notification.util';
 import { useAuthStore } from '@/vue/store/auth/auth.store';
 import { useRouter } from 'vue-router';
 import { ENUM_ROUTER_NAME } from '@/vue/router/enum/router-name.enum';
+import { LoginEntity } from '@/models/entity/auth/login.entity';
 
 const data = reactive(AuthData);
 const showPwd = ref(false);
@@ -27,6 +28,13 @@ async function submitForm(): Promise<void> {
         router.push({ name: ENUM_ROUTER_NAME.LISTA_PRODUTOS })
     });
 }
+
+onBeforeUnmount(() => {
+    data.payload_login = new LoginEntity({
+        email: null,
+        password: null,
+    });
+})
 </script>
 
 <template>
@@ -46,7 +54,7 @@ async function submitForm(): Promise<void> {
                         </InputIcon>
 
                         <InputText id="email" v-model="data.payload_login.email" type="email"
-                            placeholder="seu-email@exemplo.com" fluid />
+                            placeholder="seu-email@exemplo.com" fluid required />
                     </IconField>
 
                     <label for="password" class="block text-900 font-medium mb-2">Senha</label>
@@ -57,7 +65,7 @@ async function submitForm(): Promise<void> {
                         </InputIcon>
 
                         <InputText id="password" v-model="data.payload_login.password"
-                            :type="showPwd ? 'text' : 'password'" placeholder="Senha" fluid />
+                            :type="showPwd ? 'text' : 'password'" placeholder="Senha" fluid required />
                     </IconField>
 
                     <div class="mt-6">
