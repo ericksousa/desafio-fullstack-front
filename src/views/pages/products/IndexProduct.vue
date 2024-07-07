@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { ref, onMounted, reactive } from 'vue';
-import { ProductEntity } from '@/models/entity/product/product.entity';
-import { FilterMatchMode } from '@primevue/core/api';
-import Button from 'primevue/button';
 import Card from 'primevue/card';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
@@ -10,9 +6,18 @@ import ProductData from '@/views/data/products/product.data';
 import InputText from 'primevue/inputtext';
 import InputIcon from 'primevue/inputicon';
 import IconField from 'primevue/iconfield';
+import Toolbar from 'primevue/toolbar';
+import Button from 'primevue/button';
+import { ref, onMounted, reactive, computed } from 'vue';
+import { FilterMatchMode } from '@primevue/core/api';
+import { useRouter } from 'vue-router';
+import { ENUM_ROUTER_NAME } from '@/vue/router/enum/router-name.enum';
+import { useProductStore } from '@/vue/store/products/products.store';
 
 const data = reactive(ProductData);
-const products = ref<ProductEntity[]>([])
+const router = useRouter();
+const productStore = useProductStore();
+
 
 const filters = ref({
     'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -25,16 +30,41 @@ const columns = [
     { field: 'category.name', header: 'Categoria' },
 ];
 
-onMounted(async () => {
+const products = computed(() => productStore.products)
+
+function goToNewProduct() {
+    router.push({ name: ENUM_ROUTER_NAME.NOVO_PRODUTO })
+}
+
+async function loadProducts() {
     await data.getProducts().then(({ data }) => {
-        products.value = data
+        productStore.$patch({
+            products: data
+        })
     })
+}
+
+onMounted(async () => {
+    if (!products.value.length) {
+        await loadProducts()
+
+    };
 });
 </script>
 
 <template>
     <Card>
         <template #content>
+            <Toolbar class="mb-6">
+                <template #end>
+                    <div class="flex gap-2">
+                        <Button label="Novo Produto" icon="pi pi-plus" size="small" @click="goToNewProduct" rounded />
+                        <Button label="Atualizar" icon="pi pi-refresh" size="small" :loading="data.loading_products"
+                            @click="loadProducts" rounded />
+                    </div>
+                </template>
+            </Toolbar>
+
             <DataTable :value="products" :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]"
                 :loading="data.loading_products" :filters="filters" tableStyle="min-width: 50rem" stripedRows paginator>
                 <template #header>

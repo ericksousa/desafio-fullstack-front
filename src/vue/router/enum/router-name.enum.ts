@@ -6,4 +6,5 @@ export enum ENUM_ROUTER_NAME {
 
     // produtos
     LISTA_PRODUTOS = "lista-produtos",
+    NOVO_PRODUTO = "novo-produtos",
 }

@@ -10,7 +10,17 @@ export const produtos_hooks: RouteRecordRaw[] = [
                 path: "",
                 name: ENUM_ROUTER_NAME.LISTA_PRODUTOS,
                 component: () =>
-                    import("@/views/pages/produtos/IndexProdutos.vue"),
+                    import("@/views/pages/products/IndexProduct.vue"),
+                meta: {
+                    title: "Produtos",
+                },
+            },
+
+            {
+                path: "novo",
+                name: ENUM_ROUTER_NAME.NOVO_PRODUTO,
+                component: () =>
+                    import("@/views/pages/products/CreateProduct.vue"),
                 meta: {
                     title: "Produtos",
                 },
