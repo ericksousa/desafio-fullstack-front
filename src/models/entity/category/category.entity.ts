@@ -1,14 +1,10 @@
-import { CategoryEntity } from "../category/category.entity";
-
-export class ProductEntity {
+export class CategoryEntity {
     id?: number;
     name?: string;
-    price?: string;
-    category?: CategoryEntity;
     created_at?: string;
     updated_at?: string;
 
-    constructor(this_class?: Partial<ProductEntity>) {
+    constructor(this_class?: Partial<CategoryEntity>) {
         if (this_class) {
             Object.entries(this_class).forEach(([key, value]) => {
                 if (key in this) this[key] = value;
